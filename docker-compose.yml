@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  # API Gateway
+  api-gateway:
+    restart: always
+    container_name: api-gateway
+    build: ./api_gateway
+    # depends_on:
+    #   - user-service
+    ports:
+      - 10000:10000
