@@ -2,9 +2,7 @@
 
 ## Struncture
 1. api_gateway
-2. user_service
-3. organization_service
-4. note_service
+2. ~~user_service~~
 
 ## Commands
 
