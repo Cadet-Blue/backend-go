@@ -6,20 +6,9 @@ type User struct {
 	Password string `json:"-" bson:"password,omitempty"`
 }
 
-type SigninUserDTO struct {
-	Email    string `json:"email" bson:"email"`
-	Password string `json:"password" bson:"password,omitempty"`
-}
-
 type CreateUserDTO struct {
-	Email          string `json:"email"`
-	Password       string `json:"password"`
-	RepeatPassword string `json:"repeat_password"`
-}
-
-type UpdateUserDTO struct {
-	Email       string `json:"email,omitempty"`
-	Password    string `json:"password,omitempty"`
-	OldPassword string `json:"old_password,omitempty"`
-	NewPassword string `json:"new_password,omitempty"`
+	Email          string `json:"email" validate:"email,required"`
+	Password       string `json:"password" validate:"required,min=8,max=16"`
+	RepeatPassword string `json:"repeat_password" validate:"required,eqfield=Password"`
+	InviteId       string `json:"invite_id,omitempty"`
 }

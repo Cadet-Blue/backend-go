@@ -6,7 +6,25 @@ services:
     restart: always
     container_name: api-gateway
     build: ./api_gateway
-    # depends_on:
-    #   - user-service
+    depends_on:
+      - user-service
     ports:
       - 10000:10000
+  # User microservice
+  user-mongodb:
+    image: 'mongo:5.0'
+    container_name: 'user-mongodb'
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadm
+      - MONGO_INITDB_ROOT_PASSWORD=mongoadm
+    ports:
+      - 27017:27017
+    volumes:
+      - ./user_service/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  user-service:
+      restart: always
+      container_name: user-service
+      build: ./user_service
+      depends_on:
+        - user-mongodb
